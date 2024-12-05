@@ -2,8 +2,9 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import { useReducer } from "react";
-import { TodoWithUseStat } from "./TodoWithUseStat";
+import { TodoWithUseState } from "./TodoWithUseState";
 import "./App.css";
+import TodoWithUsereducer from "./TodoWithUsereducer";
 function reducer(state, action) {
   // if (action.type == "increment") {
   //   return { count: state.count + 1 };
@@ -17,8 +18,8 @@ function reducer(state, action) {
 function App() {
   return (
     <>
-      <TodoWithUseStat />
-      
+      {/* <TodoWithUseState /> */}
+      <TodoWithUsereducer />
     </>
   );
 }

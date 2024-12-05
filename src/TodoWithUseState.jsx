@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export const TodoWithUseStat = () => {
+export const TodoWithUseState = () => {
   const [value, setValue] = useState("");
   const [todos, setTodos] = useState([]);
 
@@ -64,9 +64,7 @@ export const TodoWithUseStat = () => {
                 onClick={() =>
                   setTodos(
                     todos.map((e) =>
-                      e.date === todo.date
-                        ? { ...e, complete: !e.complete }
-                        : e
+                      e.date === todo.date ? { ...e, complete: !e.complete } : e
                     )
                   )
                 }
