@@ -1,26 +1,6 @@
-import React, { useReducer, useState, useEffect, act } from "react";
-
+import React, { useReducer, useState, useEffect } from "react";
+import reducer from "./reducer";
 const TodoWithUsereducer = () => {
-  const reducer = (tasks, action) => {
-    if (action.type == "add") {
-      return [
-        ...tasks,
-        { name: action.name, id: action.id, complete: action.complete },
-      ];
-    } else if (action.type == "delete") {
-      return tasks.filter((item) => {
-        return item.id !== action.id;
-      });
-    } else if (action.type == "complete") {
-      return tasks.map((item) => {
-        if (item.id == action.id) {
-          return { ...item, complete: !item.complete};
-        } else {
-          return item;
-        }
-      });
-    }
-  };
   const [value, setValue] = useState("");
   const [state, dispath] = useReducer(reducer, []);
   useEffect(() => {
@@ -29,6 +9,7 @@ const TodoWithUsereducer = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center p-5 ">
+      <div className="">TODO LIST WITH USEREDUCER</div>
       <form className="w-full max-w-md flex gap-3 mb-5">
         <input
           type="text"
@@ -74,17 +55,25 @@ const TodoWithUsereducer = () => {
                 DELETE
               </button>
               <button
-               className={`px-3  w-28 py-1 text-white rounded-md ${
-                item.complete
-                  ? "bg-gray-500 hover:bg-gray-600"
-                  : "bg-blue-500 hover:bg-blue-600"
-              }`}
+                className={`px-3  w-28 py-1 text-white rounded-md ${
+                  item.complete
+                    ? "bg-gray-500 hover:bg-gray-600"
+                    : "bg-blue-500 hover:bg-blue-600"
+                }`}
                 onClick={() => {
                   dispath({ id: item.id, type: "complete" });
                 }}
               >
-                
-                {item.complete ? "UNDO":"COMPLETE"}
+                {item.complete ? "UNDO" : "COMPLETE"}
+              </button>
+              <button
+                onClick={() => {
+                  const newValue = prompt("Enter new value");
+                  dispath({ type: "edit", newValue, id: item.id });
+                }}
+                className="px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
+              >
+                EDIT
               </button>
             </div>
           );
